@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 
-import monstersRoutes from "./src/routes/monstersRoutes.js"
+import animesRoutes from './src/routes/animesRoutes.js'
 
 const app = express();
 app.use(express.json());
@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
     res.send("Servidor do Sistema de Persongem de anime Inciando ...🏹");
 });
 
-app.use("/monsters", monstersRoutes)
+app.use("/animes", animesRoutes)
 
 app.listen(serverPort, () => {
   console.log(`Servidor do Sistema de Persongem de anime Inciando em: 🏹  http://localhost:${serverPort}`);

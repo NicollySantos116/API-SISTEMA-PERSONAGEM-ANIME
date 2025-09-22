@@ -1,4 +1,4 @@
-const personagensAnime = [
+const animes = [
     {
         id: 1,
         nome: "Ren Kurosaki",
@@ -111,4 +111,4 @@ const personagensAnime = [
     }
 ];
 
-export default { personagensAnime };
+export default { animes };
