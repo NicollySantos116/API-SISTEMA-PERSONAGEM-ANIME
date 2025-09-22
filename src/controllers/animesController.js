@@ -98,9 +98,19 @@ const createAnime = (req, res) => {
             message: "O campo 'habilidades' é obrigatório"
         });
     }
-  
 
-    monsters.push(novaMonster);
+    const novoAnime= {
+        id: animes.length + 1,
+        nome: nome,
+        classe,
+        poder,
+        nivel,
+        raridade,
+        elemento,
+        habilidades,
+    }
+
+    animes.push(novoAnime);
 
     res.status(201).json({
         success: true,
@@ -109,7 +119,86 @@ const createAnime = (req, res) => {
     })
 
 }
+const deleteAnime = (req, res) => {
+    const { id } = req.params
+
+    if (isNaN(id)) {
+        return res.status(400).json({
+            success: false,
+            message: "O id deve ser válido"
+        });
+    }
+
+    const idParaApagar = parseInt(id);
+
+    const AnimeParaRemover = animes.find(a => a.id === idParaApagar);
+    console.log(AnimeParaRemover)
+
+    if (!AnimeParaRemover) {
+        return res.status(404).json({
+            success: false,
+            message: `Anime ${id} não existe`
+        });
+    }
+
+    const AnimeFiltrado = animes.filter(a=> a.id !== id);
+    console.log(AnimeFiltrado)
+
+    return res.status(200).json({
+        success: true,
+        message: "O Anime foi removido com sucesso!"
+    })
+}
+
+const updateAnime = (req, res) => {
+    const id = parseInt(req.params.id);
+    const { nome ,anime, classe, poder,nivel,elemento, raridade,habilidades} = req.body;
+
+    const elementoAnime = ["Trevas", "Luz", "Terra", "Vazio", "Água", "Vento", "Metal", "Natureza", "Fogo", "Gelo"];
+
+    if (isNaN(id)) {
+        return res.status(400).json({
+            success: false,
+            message: "O id deve ser válido"
+        });
+    }
+
+    const AnimeExiste = animes.find(a => a.id === id);
+
+    if (!AnimeExiste) {
+        return res.status(404).json({
+            success: false,
+            message: "Anime  não existe"
+        });
+    }
+
+    const animesAtualizados = animes.map(a =>
+        a.id === id
+            ? {
+                ...a,
+                ...(anime && { anime}),
+                ...(nome && { nome }),
+                ...(anime && { anime }),
+                ...(classe && { classe }),
+                ...(poder && { poder }),
+                ...(nivel && { nivel}),
+                ...(raridade && {raridade}),
+                ...(elemento&& { elemento}),
+                ...(habilidades && { habilidades })
+            }
+            : a
+    );
+
+    animes.splice(0, animes.length, ...animesAtualizados);
+    const animeAtualizado = animes.find(a => a.id === id);
+
+    res.status(200).json({
+        success: true,
+        message: "Anime atualizado com sucesso",
+        monstro: animeAtualizado
+    })
+
+}
 
 
-
-export { getAllAnimes,getAnimeByld, createAnime};
+export { getAllAnimes,getAnimeByld, createAnime, deleteAnime,updateAnime};
