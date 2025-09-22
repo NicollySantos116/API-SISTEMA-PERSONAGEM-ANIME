@@ -1,0 +1,20 @@
+{
+  "name": "api-sistema-personagem-anime",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "cls && nodemon server.js"
+  },
+  "keywords": ["server","api","express","nodejs","dotenv",  "nodemon","anime","personagem"],
+  "author": "Nicolly Santos",
+  "license": "MIT",
+  "description": "Este projeto consiste em uma aplicação CRUD (Create, Read, Update, Delete) desenvolvida com foco em back-end, utilizando como tema o Sistema de Personagem de Anime",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10"
+  }
+}
